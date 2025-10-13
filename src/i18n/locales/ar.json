@@ -1,0 +1,44 @@
+{
+  "app": {
+    "title": "كيرالا هورايزون",
+    "subtitle": "رفيقك الشامل للسفر"
+  },
+  "navigation": {
+    "transport": "النقل",
+    "stay": "الإقامة",
+    "food": "الطعام",
+    "culture": "الثقافة",
+    "sustainability": "الاستدامة",
+    "community": "المجتمع",
+    "aiTools": "أدوات الذكاء الاصطناعي",
+    "tripPlanner": "تخطيط الرحلة",
+    "sos": "الطوارئ",
+    "shopping": "التسوق",
+    "settings": "الإعدادات"
+  },
+  "header": {
+    "search": "ابحث في كيرالا...",
+    "profile": "الملف الشخصي",
+    "notifications": "الإشعارات",
+    "language": "اللغة"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "retry": "إعادة المحاولة",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "search": "بحث",
+    "filter": "تصفية",
+    "sort": "ترتيب",
+    "viewAll": "عرض الكل",
+    "bookNow": "احجز الآن",
+    "learnMore": "اعرف المزيد",
+    "getDirections": "احصل على الاتجاهات",
+    "call": "اتصل",
+    "share": "مشاركة",
+    "favorite": "المفضلة",
+    "rate": "تقييم",
+    "review": "مراجعة"
+  }
+}

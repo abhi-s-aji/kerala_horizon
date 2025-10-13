@@ -1,0 +1,44 @@
+{
+  "app": {
+    "title": "केरल होराइज़न",
+    "subtitle": "आपका संपूर्ण यात्रा साथी"
+  },
+  "navigation": {
+    "transport": "परिवहन",
+    "stay": "रहना",
+    "food": "भोजन",
+    "culture": "संस्कृति",
+    "sustainability": "स्थिरता",
+    "community": "समुदाय",
+    "aiTools": "AI उपकरण",
+    "tripPlanner": "यात्रा योजना",
+    "sos": "SOS",
+    "shopping": "खरीदारी",
+    "settings": "सेटिंग्स"
+  },
+  "header": {
+    "search": "केरल में खोजें...",
+    "profile": "प्रोफ़ाइल",
+    "notifications": "सूचनाएं",
+    "language": "भाषा"
+  },
+  "common": {
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "retry": "पुनः प्रयास करें",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "search": "खोजें",
+    "filter": "फ़िल्टर",
+    "sort": "क्रमबद्ध करें",
+    "viewAll": "सभी देखें",
+    "bookNow": "अभी बुक करें",
+    "learnMore": "और जानें",
+    "getDirections": "दिशा-निर्देश प्राप्त करें",
+    "call": "कॉल करें",
+    "share": "साझा करें",
+    "favorite": "पसंदीदा",
+    "rate": "रेट करें",
+    "review": "समीक्षा"
+  }
+}

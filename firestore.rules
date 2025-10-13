@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read and write their own user document
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Users can read and write their own trips
+    match /trips/{tripId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.userId == request.auth.uid || 
+         request.auth.uid == request.resource.data.userId);
+    }
+    
+    // Blog posts are readable by all authenticated users, writable by author
+    match /blogPosts/{postId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && 
+        (resource.data.userId == request.auth.uid || 
+         request.auth.uid == request.resource.data.userId);
+    }
+    
+    // Green score activities are readable and writable by the user
+    match /greenScoreActivities/{activityId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.userId == request.auth.uid || 
+         request.auth.uid == request.resource.data.userId);
+    }
+    
+    // Comments are readable by all authenticated users, writable by author
+    match /blogPosts/{postId}/comments/{commentId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && 
+        (resource.data.userId == request.auth.uid || 
+         request.auth.uid == request.resource.data.userId);
+    }
+  }
+}
+

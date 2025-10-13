@@ -1,0 +1,45 @@
+{
+  "app": {
+    "title": "Kerala Horizon",
+    "subtitle": "Ihr vollständiger Reisebegleiter"
+  },
+  "navigation": {
+    "transport": "Transport",
+    "stay": "Unterkunft",
+    "food": "Essen",
+    "culture": "Kultur",
+    "sustainability": "Nachhaltigkeit",
+    "community": "Gemeinschaft",
+    "aiTools": "KI-Tools",
+    "tripPlanner": "Reiseplanung",
+    "sos": "SOS",
+    "shopping": "Einkaufen",
+    "settings": "Einstellungen"
+  },
+  "header": {
+    "search": "Kerala durchsuchen...",
+    "profile": "Profil",
+    "notifications": "Benachrichtigungen",
+    "language": "Sprache"
+  },
+  "common": {
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "retry": "Wiederholen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "sort": "Sortieren",
+    "viewAll": "Alle anzeigen",
+    "bookNow": "Jetzt buchen",
+    "learnMore": "Mehr erfahren",
+    "getDirections": "Wegbeschreibung",
+    "call": "Anrufen",
+    "share": "Teilen",
+    "favorite": "Favorit",
+    "rate": "Bewerten",
+    "review": "Bewertung"
+  }
+}
+

@@ -1,0 +1,29 @@
+[debug] [2025-10-02T05:24:21.018Z] ----------------------------------------------------------------------
+[debug] [2025-10-02T05:24:21.022Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\abhis\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting
+[debug] [2025-10-02T05:24:21.022Z] CLI Version:   14.17.0
+[debug] [2025-10-02T05:24:21.022Z] Platform:      win32
+[debug] [2025-10-02T05:24:21.022Z] Node Version:  v22.19.0
+[debug] [2025-10-02T05:24:21.023Z] Time:          Thu Oct 02 2025 10:54:21 GMT+0530 (India Standard Time)
+[debug] [2025-10-02T05:24:21.023Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-10-02T05:24:21.257Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-10-02T05:24:21.258Z] > authorizing via signed-in user (abhisajieden@gmail.com)
+[debug] [2025-10-02T05:24:21.258Z] [iam] checking project kerala-horizon for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-10-02T05:24:21.259Z] Checked if tokens are valid: true, expires at: 1759386250524
+[debug] [2025-10-02T05:24:21.259Z] Checked if tokens are valid: true, expires at: 1759386250524
+[debug] [2025-10-02T05:24:21.260Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/kerala-horizon:testIamPermissions [none]
+[debug] [2025-10-02T05:24:21.261Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/kerala-horizon:testIamPermissions x-goog-quota-user=projects/kerala-horizon
+[debug] [2025-10-02T05:24:21.261Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/kerala-horizon:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-10-02T05:24:22.838Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/kerala-horizon:testIamPermissions 200
+[debug] [2025-10-02T05:24:22.838Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/kerala-horizon:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-10-02T05:24:22.839Z] Checked if tokens are valid: true, expires at: 1759386250524
+[debug] [2025-10-02T05:24:22.839Z] Checked if tokens are valid: true, expires at: 1759386250524
+[debug] [2025-10-02T05:24:22.839Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/kerala-horizon [none]
+[debug] [2025-10-02T05:24:44.454Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/kerala-horizon, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/kerala-horizon failed, reason: read ECONNRESET
+[debug] [2025-10-02T05:24:44.455Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/kerala-horizon (original: request to https://firebase.googleapis.com/v1beta1/projects/kerala-horizon failed, reason: read ECONNRESET)
+[debug] [2025-10-02T05:24:49.472Z] Error: Timed out.
+    at Timeout._onTimeout (C:\Users\abhis\AppData\Roaming\npm\node_modules\firebase-tools\lib\utils.js:275:49)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7)
+[error] 
+[error] Error: An unexpected error has occurred.
