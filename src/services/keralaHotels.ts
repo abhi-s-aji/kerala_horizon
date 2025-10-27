@@ -413,3 +413,6 @@ export const searchHotels = (query: string) => {
 
 
 
+
+
+
