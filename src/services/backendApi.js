@@ -39,6 +39,10 @@ class BackendAPI {
         throw new Error(data.message || 'API request failed');
       }
 
+      // Handle both { success: true, data: {...} } and { success: true, ...data } formats
+      if (data.success && data.data) {
+        return { ...data, ...data.data };
+      }
       return data;
     } catch (error) {
       console.error('API request error:', error);
@@ -208,15 +212,30 @@ class BackendAPI {
   }
 
   async trackBus(routeId, busNumber) {
-    return this.request(`/transport/bus/tracking?routeId=${routeId}&busNumber=${busNumber}`);
+    const response = await this.request(`/transport/bus/tracking?routeId=${routeId}&busNumber=${busNumber}`);
+    return {
+      success: response.success || true,
+      busNumber: response.busNumber || response.data?.busNumber || busNumber,
+      ...response.data || response
+    };
   }
 
   async getTrainSchedules(from, to, date) {
-    return this.request(`/transport/train/schedules?from=${from}&to=${to}&date=${date}`);
+    const response = await this.request(`/transport/train/schedules?from=${from}&to=${to}&date=${date}`);
+    return {
+      success: response.success || true,
+      schedules: response.schedules || response.data?.schedules || response.data?.data?.schedules || [],
+      ...response
+    };
   }
 
   async getFlightStatus(flightNumber, date) {
-    return this.request(`/transport/flight/status?flightNumber=${flightNumber}&date=${date}`);
+    const response = await this.request(`/transport/flight/status?flightNumber=${flightNumber}&date=${date}`);
+    return {
+      success: response.success || true,
+      flights: response.flights || response.data?.flights || response.data?.data?.flights || [],
+      ...response
+    };
   }
 
   async getCabEstimates(from, to, service = 'all') {
@@ -256,8 +275,23 @@ class BackendAPI {
 
   // Stay & Accommodation APIs
   async searchAccommodations(filters) {
-    const params = new URLSearchParams(filters);
-    return this.request(`/stay/search?${params}`);
+    // Convert filters object to URL params
+    const params = new URLSearchParams();
+    Object.keys(filters).forEach(key => {
+      if (Array.isArray(filters[key])) {
+        filters[key].forEach(item => params.append(key, item));
+      } else if (filters[key] !== undefined && filters[key] !== null) {
+        params.append(key, filters[key]);
+      }
+    });
+    const response = await this.request(`/stay/search?${params}`);
+    // Ensure accommodations array is properly returned
+    return {
+      success: response.success || true,
+      accommodations: response.accommodations || response.data?.accommodations || [],
+      total: response.total || response.data?.total || 0,
+      ...response
+    };
   }
 
   async getAccommodation(id) {
@@ -288,8 +322,23 @@ class BackendAPI {
 
   // Food & Cuisine APIs
   async searchRestaurants(filters) {
-    const params = new URLSearchParams(filters);
-    return this.request(`/food/restaurants/search?${params}`);
+    // Convert filters object to URL params, handling nested objects
+    const params = new URLSearchParams();
+    Object.keys(filters).forEach(key => {
+      if (Array.isArray(filters[key])) {
+        filters[key].forEach(item => params.append(key, item));
+      } else if (filters[key] !== undefined && filters[key] !== null) {
+        params.append(key, filters[key]);
+      }
+    });
+    const response = await this.request(`/food/restaurants/search?${params}`);
+    // Ensure restaurants array is properly returned
+    return {
+      success: response.success || true,
+      restaurants: response.restaurants || response.data?.restaurants || [],
+      total: response.total || response.data?.total || 0,
+      ...response
+    };
   }
 
   async getRestaurant(id) {
@@ -328,6 +377,113 @@ class BackendAPI {
       method: 'POST',
       body: JSON.stringify(reviewData)
     });
+  }
+
+  // Culture APIs
+  async getCulturalExperiences(lat, lng, radius = 20000, category = 'all') {
+    const response = await this.request(`/culture/experiences?lat=${lat}&lng=${lng}&radius=${radius}&category=${category}`);
+    return {
+      success: response.success || true,
+      experiences: response.experiences || response.data?.experiences || [],
+      ...response
+    };
+  }
+
+  async getHeritageSites(lat, lng, radius = 20000, type = 'all') {
+    const response = await this.request(`/culture/heritage-sites?lat=${lat}&lng=${lng}&radius=${radius}&type=${type}`);
+    return {
+      success: response.success || true,
+      heritageSites: response.heritageSites || response.data?.heritageSites || [],
+      ...response
+    };
+  }
+
+  async getArtForms() {
+    const response = await this.request('/culture/art-forms');
+    return {
+      success: response.success || true,
+      artForms: response.artForms || response.data?.artForms || [],
+      ...response
+    };
+  }
+
+  // Trip Planner APIs
+  async getTripTemplates() {
+    const response = await this.request('/trip-planner/templates');
+    return {
+      success: response.success || true,
+      templates: response.templates || response.data?.templates || [],
+      ...response
+    };
+  }
+
+  async createTripPlan(planData) {
+    return this.request('/trip-planner/plan', {
+      method: 'POST',
+      body: JSON.stringify(planData)
+    });
+  }
+
+  // Sustainability APIs
+  async getGreenScore(userId) {
+    const response = await this.request(`/sustainability/green-score?userId=${userId}`);
+    return {
+      success: response.success || true,
+      totalScore: response.totalScore || 0,
+      level: response.level || 'Beginner',
+      badges: response.badges || [],
+      activities: response.activities || [],
+      rewards: response.rewards || [],
+      carbonFootprint: response.carbonFootprint || {},
+      ...response
+    };
+  }
+
+  async addEcoActivity(activity, points, category) {
+    return this.request('/sustainability/activity', {
+      method: 'POST',
+      body: JSON.stringify({ activity, points, category })
+    });
+  }
+
+  // Community APIs
+  async getCommunityPosts(limit = 20, offset = 0, category = 'all') {
+    const response = await this.request(`/community/posts?limit=${limit}&offset=${offset}&category=${category}`);
+    return {
+      success: response.success || true,
+      posts: response.posts || response.data?.posts || [],
+      total: response.total || 0,
+      ...response
+    };
+  }
+
+  async createCommunityPost(postData) {
+    return this.request('/community/posts', {
+      method: 'POST',
+      body: JSON.stringify(postData)
+    });
+  }
+
+  // SOS APIs
+  async getEmergencyContacts(lat, lng) {
+    const response = await this.request(`/sos/emergency-contacts?lat=${lat}&lng=${lng}`);
+    return {
+      success: response.success || true,
+      emergencyContacts: response.emergencyContacts || response.data?.emergencyContacts || [],
+      nearbyServices: response.nearbyServices || response.data?.nearbyServices || [],
+      ...response
+    };
+  }
+
+  // Shopping APIs
+  async getShoppingStores(lat, lng, radius = 10000, category = 'all') {
+    const response = await this.request(`/shopping/stores?lat=${lat}&lng=${lng}&radius=${radius}&category=${category}`);
+    return {
+      success: response.success || true,
+      stores: response.stores || response.data?.stores || [],
+      total: response.total || 0,
+      ...response
+    };
   }
 
   // AI Intelligence APIs

@@ -631,6 +631,300 @@ router.get('/cab/estimate', async (req, res) => {
   }
 });
 
+// Get water transport schedules
+router.get('/water/schedules', async (req, res) => {
+  try {
+    const { from, to, date } = req.query;
+
+    if (!from || !to) {
+      return res.status(400).json({
+        success: false,
+        message: 'From and to locations are required'
+      });
+    }
+
+    const cacheKey = `water_schedules_${from}_${to}_${date || 'today'}`;
+    const cachedData = cache.get(cacheKey);
+    
+    if (cachedData) {
+      return res.json({
+        success: true,
+        data: cachedData,
+        cached: true
+      });
+    }
+
+    // Mock water transport data
+    const schedules = [
+      {
+        id: 'wt_001',
+        type: 'ferry',
+        from: from,
+        to: to,
+        departureTime: '08:00',
+        arrivalTime: '09:30',
+        fare: 50,
+        available: true,
+        capacity: 100,
+        currentPassengers: 45
+      },
+      {
+        id: 'wt_002',
+        type: 'houseboat',
+        from: from,
+        to: to,
+        departureTime: '10:00',
+        arrivalTime: '14:00',
+        fare: 2000,
+        available: true,
+        capacity: 8,
+        currentPassengers: 3
+      }
+    ];
+
+    const responseData = {
+      from,
+      to,
+      date: date || new Date().toISOString().split('T')[0],
+      schedules,
+      totalSchedules: schedules.length,
+      timestamp: new Date().toISOString()
+    };
+
+    cache.set(cacheKey, responseData);
+    res.json({ success: true, data: responseData });
+
+  } catch (error) {
+    console.error('Water transport error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch water transport schedules',
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
+// Get EV charging stations
+router.get('/ev/stations', async (req, res) => {
+  try {
+    const { lat, lng, radius = 10000 } = req.query;
+
+    if (!lat || !lng) {
+      return res.status(400).json({
+        success: false,
+        message: 'Latitude and longitude are required'
+      });
+    }
+
+    const cacheKey = `ev_stations_${lat}_${lng}_${radius}`;
+    const cachedData = cache.get(cacheKey);
+    
+    if (cachedData) {
+      return res.json({
+        success: true,
+        data: cachedData,
+        cached: true
+      });
+    }
+
+    const stations = await getNearbyEVStations(parseFloat(lat), parseFloat(lng), parseInt(radius));
+    const responseData = {
+      location: { lat: parseFloat(lat), lng: parseFloat(lng) },
+      radius: parseInt(radius),
+      stations,
+      total: stations.length,
+      timestamp: new Date().toISOString()
+    };
+
+    cache.set(cacheKey, responseData);
+    res.json({ success: true, data: responseData });
+
+  } catch (error) {
+    console.error('EV stations error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch EV stations',
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
+// Get parking spots
+router.get('/parking/spots', async (req, res) => {
+  try {
+    const { lat, lng, radius = 5000 } = req.query;
+
+    if (!lat || !lng) {
+      return res.status(400).json({
+        success: false,
+        message: 'Latitude and longitude are required'
+      });
+    }
+
+    const cacheKey = `parking_spots_${lat}_${lng}_${radius}`;
+    const cachedData = cache.get(cacheKey);
+    
+    if (cachedData) {
+      return res.json({
+        success: true,
+        data: cachedData,
+        cached: true
+      });
+    }
+
+    const spots = await getNearbyParkingSpots(parseFloat(lat), parseFloat(lng), parseInt(radius));
+    const responseData = {
+      location: { lat: parseFloat(lat), lng: parseFloat(lng) },
+      radius: parseInt(radius),
+      spots,
+      total: spots.length,
+      timestamp: new Date().toISOString()
+    };
+
+    cache.set(cacheKey, responseData, 60); // Cache for 1 minute (real-time data)
+    res.json({ success: true, data: responseData });
+
+  } catch (error) {
+    console.error('Parking spots error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch parking spots',
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
+// Get traffic alerts
+router.get('/traffic/alerts', async (req, res) => {
+  try {
+    const { lat, lng, radius = 20000 } = req.query;
+
+    if (!lat || !lng) {
+      return res.status(400).json({
+        success: false,
+        message: 'Latitude and longitude are required'
+      });
+    }
+
+    const cacheKey = `traffic_alerts_${lat}_${lng}_${radius}`;
+    const cachedData = cache.get(cacheKey);
+    
+    if (cachedData) {
+      return res.json({
+        success: true,
+        data: cachedData,
+        cached: true
+      });
+    }
+
+    // Mock traffic alerts
+    const alerts = [
+      {
+        id: 'ta_001',
+        type: 'congestion',
+        severity: 'medium',
+        location: 'NH-66, Kochi',
+        description: 'Heavy traffic on NH-66 near Edappally',
+        estimatedDelay: '15 minutes',
+        alternateRoute: 'Via MG Road',
+        timestamp: new Date().toISOString()
+      },
+      {
+        id: 'ta_002',
+        type: 'accident',
+        severity: 'high',
+        location: 'Marine Drive, Kochi',
+        description: 'Road blocked due to accident',
+        estimatedDelay: '30 minutes',
+        alternateRoute: 'Via Chittoor Road',
+        timestamp: new Date().toISOString()
+      }
+    ];
+
+    const responseData = {
+      location: { lat: parseFloat(lat), lng: parseFloat(lng) },
+      radius: parseInt(radius),
+      alerts,
+      total: alerts.length,
+      timestamp: new Date().toISOString()
+    };
+
+    cache.set(cacheKey, responseData, 120); // Cache for 2 minutes
+    res.json({ success: true, data: responseData });
+
+  } catch (error) {
+    console.error('Traffic alerts error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch traffic alerts',
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
+// Plan route
+router.get('/route/plan', async (req, res) => {
+  try {
+    const { from, to, mode = 'driving', avoid = [] } = req.query;
+
+    if (!from || !to) {
+      return res.status(400).json({
+        success: false,
+        message: 'From and to locations are required'
+      });
+    }
+
+    const cacheKey = `route_plan_${from}_${to}_${mode}_${avoid.join(',')}`;
+    const cachedData = cache.get(cacheKey);
+    
+    if (cachedData) {
+      return res.json({
+        success: true,
+        data: cachedData,
+        cached: true
+      });
+    }
+
+    // Mock route planning
+    const route = {
+      from,
+      to,
+      mode,
+      distance: '25.5 km',
+      duration: '45 minutes',
+      steps: [
+        { instruction: 'Start from', location: from, distance: '0 km', duration: '0 min' },
+        { instruction: 'Turn right onto', location: 'MG Road', distance: '2 km', duration: '5 min' },
+        { instruction: 'Continue straight', location: 'NH-66', distance: '20 km', duration: '35 min' },
+        { instruction: 'Arrive at', location: to, distance: '0 km', duration: '0 min' }
+      ],
+      alternatives: [
+        {
+          distance: '28 km',
+          duration: '50 minutes',
+          description: 'Via bypass road'
+        }
+      ]
+    };
+
+    const responseData = {
+      route,
+      timestamp: new Date().toISOString()
+    };
+
+    cache.set(cacheKey, responseData);
+    res.json({ success: true, data: responseData });
+
+  } catch (error) {
+    console.error('Route planning error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to plan route',
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
 // Helper functions
 async function getNearbyBusStations(lat, lng, radius) {
   // Mock implementation - replace with real API

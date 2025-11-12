@@ -10,7 +10,7 @@ const cache = new NodeCache({ stdTTL: 300 }); // 5 minutes cache
 
 const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY || 'demo_key';
 
-// Search restaurants
+// Search restaurants (alias for compatibility)
 router.get('/restaurants/search', async (req, res) => {
   try {
     const { 
