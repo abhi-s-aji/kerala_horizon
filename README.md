@@ -1,295 +1,223 @@
-# Kerala Horizon 🌴
+Kerala Horizon
 
-A comprehensive, responsive travel companion web application for Kerala tourism built with React, TypeScript, Tailwind CSS, and Firebase.
+Kerala Horizon is a full-stack, TypeScript-based travel companion web application designed to enhance tourism experiences across Kerala. The platform integrates trip planning, transportation systems, accommodation discovery, cultural exploration, sustainability tracking, and safety tools within a modular and scalable architecture.
 
-## ✨ Features
+The system is built primarily using TypeScript and React, with Firebase services and Node.js backend support.
 
-### 🚍 Transport & Connectivity
-- Real-time KSRTC & Swift bus tracking
-- Train schedules with IRCTC integration
-- Flight status for CIAL, Trivandrum, Kannur airports
-- Cab aggregator integration (Uber, Ola, local autos)
-- Water transport schedules (ferries, houseboats)
-- Route planner with multi-modal suggestions
-- EV charging station locator
-- Parking finder and fuel station map
-- Traffic alerts and smart detours
+Technology Stack
+Primary Languages
 
-### 🏨 Stay & Accommodation
-- KTDC hotel and resort booking
-- PWD rest house availability
-- Verified homestays and local hosts
-- Luxury resorts and Ayurveda retreats
-- Budget stay finder with filters
-- Live room availability and dynamic pricing
-- Accessibility filters (wheelchair, senior-friendly, LGBTQ+ friendly)
-- Emergency stay suggestions during strikes/weather events
+TypeScript (69%)
 
-### 🍛 Food & Local Cuisine
-- Nearby restaurants and cafes with dietary filters
-- Traditional Kerala cuisine guide
-- Food safety ratings and verified kitchens
-- Street food hotspots and local favorites
-- Ayurvedic diet recommendations
-- Cooking classes and culinary experiences
-- AI-powered dish suggestions based on location and time
+JavaScript (26%)
 
-### 🧘 Culture, Wellness & Experiences
-- Ayurveda center directory and booking
-- Eco-tourism trails, forest camps, wildlife sanctuaries
-- Temple etiquette and festival calendar
-- Art and craft villages (e.g., Sargaalaya)
-- Backwater cruise booking
-- Cultural event alerts (Kathakali, Theyyam, music fests)
-- Responsible tourism experiences
-- Volunteer opportunities with NGOs
-- Photography spots and golden hour alerts
-- Traditional dress rental locator
-- Interactive heritage trails with AR overlays
-- Local legends and folklore audio guide
+HTML / CSS
 
-### 🌱 Sustainability & Green Score
-- Green Score Rewards for eco-friendly travel choices
-- Bonus points for visiting eco-sensitive zones
-- Redeemable discounts on KTDC stays and local experiences
-- Carbon footprint tracker and eco-partner badges
-- Smart nudges for greener travel
-- Plastic-free travel tips and refill station locator
+Shell scripting
 
-### ✍️ Community & Storytelling
-- Kerala travel blog hub with AI writing assistance
-- Local Voices section for cultural insights
-- "Ask a Local" feature for real-time help
-- Photo gallery and travel journal with map overlays
-- Traveler feed and social wall
-- Live chat with nearby tourists
-- Photo contests, travel challenges, and leaderboards
+Dockerfile configuration
 
-### 🤖 AI-Powered Intelligence
-- AI travel concierge for personalized suggestions
-- "Surprise Me" mode for spontaneous adventures
-- Real-time itinerary reshuffling based on weather and traffic
-- AI language assistant (Malayalam ↔ English/Hindi) with voice playback
-- AI packing assistant and travel checklist
-- AI safety alerts and alternate route suggestions
-- AI expense optimizer and budget planner
-- AI-powered itinerary builder with mood-based planning
+Frontend
 
-### 🧭 Trip Planning & Management
-- Smart itinerary builder with interest, time, and budget filters
-- Trip mood selector (Relaxation, Adventure, Spiritual, Cultural, Family)
-- Group travel planner with shared itinerary and expense tracking
-- Offline trip mode for poor connectivity zones
-- Visa and entry requirement checker
-- Document vault for passport, ID, and tickets
-- Currency converter with live forex rates
-- Weather radar and monsoon alerts
-- Travel insurance integration
+React (TypeScript-based)
 
-### 🚨 SOS & Emergency Tools
-- One-tap SOS button with live location sharing
-- Emergency toolkit with helplines, phrases, and first-aid tips
-- Women safety mode with verified safe zones and contact shortcuts
-- Disaster alerts and evacuation guides
-- Nearby hospital, police station, and safe shelter locator
+Tailwind CSS
 
-### 🛍️ Shopping & Local Marketplace
-- Handicraft store locator and artisan profiles
-- Spice market guide and verified souvenir shops
-- Digital wallet integration for UPI and international cards
-- Tax-free shopping guide for foreign tourists
-- Local business marketplace for guides, hosts, and experiences
+React Router DOM
 
-## 🛠️ Tech Stack
+Framer Motion
 
-- **Frontend**: React 19.1.1 with TypeScript
-- **Styling**: Tailwind CSS with custom design system
-- **Animations**: Framer Motion for smooth transitions
-- **Internationalization**: React i18next with 6 language support
-- **Backend**: Firebase (Authentication, Firestore, Storage, Functions)
-- **Icons**: Lucide React
-- **Routing**: React Router DOM
+React i18next (Internationalization)
 
-## 🎨 Design System
+Backend
 
-### Colors
-- **Primary**: Blue gradient for main actions
-- **Kerala**: Green tones representing Kerala's nature
-- **Accent**: Purple for special features
-- **Semantic**: Red for emergencies, Orange for shopping, etc.
+Node.js API (backend directory)
 
-### Typography
-- **Display**: Poppins for headings
-- **Body**: Inter for content
-- **Responsive**: Mobile-first approach
+Firebase Authentication
 
-### Components
-- **Cards**: Modular content tiles with hover effects
-- **Sidebar**: Fixed vertical navigation with collapsible mobile view
-- **Header**: Sticky top bar with search and actions
-- **Theme**: Dark/light mode with smooth transitions
+Firestore Database
 
-## 🌍 Multilingual Support
+Firebase Storage
 
-- English 🇺🇸
-- Malayalam 🇮🇳
-- Hindi 🇮🇳
-- Tamil 🇮🇳
-- Arabic 🇸🇦 (RTL support)
-- German 🇩🇪
+Firebase Hosting
 
-## 📱 Responsive Design
+Firebase Cloud Functions (optional deployment)
 
-- **Mobile**: Bottom navigation drawer with swipe gestures
-- **Tablet**: Optimized sidebar and content layout
-- **Desktop**: Full sidebar with expanded features
-- **Accessibility**: High contrast mode, voice narration, keyboard navigation
+External Integrations (Configurable)
 
-## 🚀 Getting Started
+Google Maps API
 
-### Prerequisites
-- Node.js 16+ 
-- npm or yarn
-- Firebase project setup
+Google Places API
 
-### Installation
+OpenWeather API
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd kerala_horizon
-```
+OpenAI API
 
-2. Install dependencies:
-```bash
-npm install
-```
+Razorpay
 
-3. Set up Firebase:
-   - Create a Firebase project
-   - Enable Authentication, Firestore, Storage, and Functions
-   - Update `src/firebase.js` with your config
+Stripe
 
-4. Start the development server:
-```bash
-npm start
-```
+Architecture Overview
 
-5. Open [http://localhost:3000](http://localhost:3000) to view the app.
+Kerala Horizon follows a modular feature-based architecture:
 
-### Available Scripts
+Component-driven UI structure
 
-- `npm start` - Runs the app in development mode
-- `npm run build` - Builds the app for production
-- `npm test` - Launches the test runner
-- `npm run eject` - Ejects from Create React App (one-way operation)
+Context-based theme management
 
-## 🏗️ Project Structure
+Internationalization with RTL support
 
-```
+Cloud-based backend infrastructure
+
+Environment-based configuration
+
+Scalable module separation
+
+Core Modules
+
+The application is organized into structured feature modules:
+
+Transport and Connectivity
+
+Stay and Accommodation
+
+Food and Local Cuisine
+
+Culture and Experiences
+
+Sustainability Tracking
+
+Community Features
+
+AI Travel Tools
+
+Trip Planning System
+
+Digital Wallet
+
+Emergency and SOS Tools
+
+Shopping and Marketplace
+
+Settings and Localization
+
+Each module is implemented inside the /src/components/Features directory.
+
+Multilingual Support
+
+The platform supports internationalization using React i18next.
+
+Supported languages:
+
+English
+
+Malayalam
+
+Hindi
+
+Tamil
+
+Arabic (RTL supported)
+
+German
+
+Project Structure
 src/
 ├── components/
 │   ├── Layout/
-│   │   ├── Sidebar.tsx
-│   │   ├── Header.tsx
-│   │   └── MainContent.tsx
 │   └── Features/
-│       ├── Transport/
-│       ├── Stay/
-│       ├── Food/
-│       ├── Culture/
-│       ├── Sustainability/
-│       ├── Community/
-│       ├── AITools/
-│       ├── TripPlanner/
-│       ├── SOS/
-│       ├── Shopping/
-│       └── Settings/
 ├── contexts/
-│   └── ThemeContext.tsx
 ├── i18n/
-│   ├── index.ts
-│   └── locales/
-│       ├── en.json
-│       ├── ml.json
-│       ├── hi.json
-│       ├── ta.json
-│       ├── ar.json
-│       └── de.json
 ├── firebase.js
-├── App.js
-└── index.js
-```
+├── App.js / App.tsx
+└── index.js / index.tsx
 
-## 🔧 Configuration
+Backend:
 
-### Firebase Setup
-1. Create a new Firebase project
-2. Enable the following services:
-   - Authentication (Email/Password, Google, Phone)
-   - Firestore Database
-   - Storage
-   - Functions
-   - Analytics
-3. Update the configuration in `src/firebase.js`
+backend/
+└── server.js
+Installation
+Prerequisites
 
-### Environment Variables
-Create a `.env` file in the root directory:
-```
-REACT_APP_FIREBASE_API_KEY=your_api_key
-REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
-REACT_APP_FIREBASE_PROJECT_ID=your_project_id
-# ... other Firebase config
-```
+Node.js 16+
 
-## 🚀 Deployment
+npm or yarn
 
-### Firebase Hosting
-1. Install Firebase CLI:
-```bash
-npm install -g firebase-tools
-```
+Firebase project configuration
 
-2. Login to Firebase:
-```bash
-firebase login
-```
+Frontend Setup
+git clone https://github.com/abhi-s-aji/kerala_horizon.git
+cd kerala_horizon
+npm install
+npm start
 
-3. Initialize Firebase in your project:
-```bash
-firebase init hosting
-```
+The application runs at:
 
-4. Build and deploy:
-```bash
+http://localhost:3000
+
+Backend Setup
+cd backend
+npm install
+node server.js
+
+Backend API runs at:
+
+http://localhost:5000
+
+Environment Variables
+
+Create a .env file in the backend directory:
+
+NODE_ENV=development
+PORT=5000
+FIREBASE_PROJECT_ID=your_project_id
+JWT_SECRET=your_secret_key
+GOOGLE_MAPS_API_KEY=your_key
+OPENWEATHER_API_KEY=your_key
+OPENAI_API_KEY=your_key
+Deployment
+Frontend (Firebase Hosting)
 npm run build
 firebase deploy
-```
+Backend
 
-## 🤝 Contributing
+Deploy using:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Firebase Functions
+or
 
-## 📄 License
+Google Cloud Run
+or
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Any Node.js hosting provider
 
-## 🙏 Acknowledgments
+Security Features
 
-- Kerala Tourism for inspiration
-- Firebase for backend services
-- Tailwind CSS for styling
-- React community for excellent tools and libraries
+Firebase Authentication
 
-## 📞 Support
+JWT-based authentication system
 
-For support, email support@keralahorizon.com or join our community discussions.
+Environment-based secret management
 
----
+Secure API configuration
 
-Made with ❤️ for Kerala Tourism#   k e r a l a - h o r i z o n  
- 
+HTTPS deployment via Firebase
+
+Design Principles
+
+Mobile-first responsive design
+
+Modular, scalable structure
+
+TypeScript-first development
+
+Internationalization-ready architecture
+
+Accessibility-conscious UI
+
+Performance-optimized build
+
+Author
+
+Abhi S Aji
+B.Tech Computer Science and Software Engineering Student
